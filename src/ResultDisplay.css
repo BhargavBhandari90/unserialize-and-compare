@@ -54,9 +54,9 @@
   background-color: #ff6b6b;
   color: white;
   border: none;
-  border-radius: 50%;
+  /* border-radius: 50%;
   width: 2rem;
-  height: 2rem;
+  height: 2rem; */
   cursor: pointer;
   display: flex;
   align-items: center;

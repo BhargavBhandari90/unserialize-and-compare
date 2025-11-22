@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { IconPlus, IconShare, IconCheck } from '@tabler/icons-react';
+import { IconPlus, IconShare, IconCheck, IconTrash } from '@tabler/icons-react';
 import Form from './Form';
 import ResultDisplay from './ResultDisplay';
 import { unserializeData } from './utils/unserialize';
@@ -91,6 +91,11 @@ function App() {
     }
   };
 
+  const handleClearAll = () => {
+    setEntries([]);
+    setShowForm(true);
+  };
+
   return (
     <div className="app">
       <header className="app-header">
@@ -112,9 +117,9 @@ function App() {
         {!showForm && entries.length === 0 && (
           <div className="empty-state">
             <p>No data to display. Click the button below to add your first entry.</p>
-            <button onClick={handleAddNew} className="btn-add" disabled={entries.length >= 3}>
+            <button onClick={handleAddNew} className="btn btn-add" disabled={entries.length >= 3}>
               <IconPlus size={20} />
-              Add New
+              Add
             </button>
           </div>
         )}
@@ -125,17 +130,23 @@ function App() {
               <h2>Results</h2>
               <div className="results-header-actions">
                 {!showForm && entries.length < 3 && (
-                  <button onClick={handleAddNew} className="btn-add">
-                    <IconPlus size={20} />
-                    Add New
-                  </button>
+                  <>
+                    <button onClick={handleClearAll} className="btn btn-remove">
+                      <IconTrash size={20} />
+                      Clear All
+                    </button>
+                    <button onClick={handleAddNew} className="btn btn-add">
+                      <IconPlus size={20} />
+                      Add
+                    </button>
+                  </>
                 )}
                 {entries.length >= 3 && (
                   <span className="max-entries-message">Max 3 comparisons</span>
                 )}
                 <button 
                   onClick={handleCopyShareLink} 
-                  className="btn-share"
+                  className="btn btn-share"
                   title="Copy shareable link"
                 >
                   {copySuccess ? (
