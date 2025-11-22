@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Form.css';
 
-function Form({ onSubmit, onCancel }) {
+function Form({ onSubmit, onCancel, maxEntriesReached }) {
   const [title, setTitle] = useState('');
   const [serializedData, setSerializedData] = useState('');
   const [error, setError] = useState('');
@@ -27,6 +27,11 @@ function Form({ onSubmit, onCancel }) {
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
+      {maxEntriesReached && (
+        <div className="form-warning">
+          Maximum of 3 entries reached. Please remove an existing entry to add a new one.
+        </div>
+      )}
       <div className="form-group">
         <label htmlFor="title">Title (Optional)</label>
         <input
@@ -56,7 +61,7 @@ function Form({ onSubmit, onCancel }) {
       </div>
 
       <div className="form-actions">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" disabled={maxEntriesReached}>
           Submit
         </button>
         {onCancel && (
