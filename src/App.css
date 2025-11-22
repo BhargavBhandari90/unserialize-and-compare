@@ -341,3 +341,100 @@
     color: rgba(0, 0, 0, 0.8);
   }
 }
+
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.made-with-love {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  margin: 0 0 0.5rem 0;
+  font-style: italic;
+}
+
+.made-by {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.twitter-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.twitter-link:hover {
+  color: #1da1f2;
+  text-decoration: underline;
+}
+
+.twitter-link svg {
+  transition: transform 0.2s ease;
+}
+
+.twitter-link:hover svg {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .footer-bottom {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .copyright {
+    font-size: 0.8rem;
+  }
+
+  .made-with-love {
+    font-size: 0.7rem;
+  }
+
+  .made-by {
+    font-size: 0.65rem;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .footer-bottom {
+    border-top-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .copyright {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .made-with-love {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .made-by {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .twitter-link {
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .twitter-link:hover {
+    color: #1da1f2;
+  }
+}

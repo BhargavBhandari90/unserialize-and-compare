@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { IconPlus, IconShare, IconCheck, IconTrash, IconShield } from '@tabler/icons-react';
+import { IconPlus, IconShare, IconCheck, IconTrash, IconShield, IconBrandX } from '@tabler/icons-react';
 import Form from './Form';
 import ResultDisplay from './ResultDisplay';
 import { unserializeData } from './utils/unserialize';
@@ -204,6 +204,23 @@ function App() {
             Also you can <strong>share comparisons</strong> easily using our shareable link feature.
           </p>
         </section>
+        
+        <div className="footer-bottom">
+          <p className="copyright">© {new Date().getFullYear()} Unserialize Guru. All rights reserved.</p>
+          <p className="made-with-love">Made with ❤️ for developers who need to unserialize and compare data quickly and securely.</p>
+          <p className="made-by">
+            Made by:{' '}
+            <a 
+              href="https://x.com/BuntyWP" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="twitter-link"
+            >
+              <IconBrandX size={14} />
+              BuntyWP
+            </a>
+          </p>
+        </div>
       </footer>
     </div>
   );
