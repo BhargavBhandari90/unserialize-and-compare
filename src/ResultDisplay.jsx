@@ -33,7 +33,7 @@ function ResultDisplay({ entry, onRemove }) {
           )}
         </div>
       )}
-      
+
       {error ? (
         <div className="result-error">
           <pre>{error}</pre>
@@ -48,4 +48,3 @@ function ResultDisplay({ entry, onRemove }) {
 }
 
 export default ResultDisplay;
-

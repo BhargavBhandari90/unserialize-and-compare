@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { IconPlus, IconShare, IconCheck, IconTrash, IconShield, IconBrandX, IconHeart } from '@tabler/icons-react';
+import {
+  IconPlus,
+  IconShare,
+  IconCheck,
+  IconTrash,
+  IconShield,
+  IconBrandX,
+  IconHeart,
+} from '@tabler/icons-react';
 import Form from './Form';
 import ResultDisplay from './ResultDisplay';
 import { unserializeData } from './utils/unserialize';
@@ -25,7 +33,7 @@ function App() {
           serializedData: entryData.serializedData,
           unserializedData: result.data,
           error: result.error,
-          format: result.format
+          format: result.format,
         };
       });
       setEntries(processedEntries);
@@ -39,7 +47,7 @@ function App() {
     if (isInitialLoad.current) {
       return;
     }
-    
+
     if (entries.length > 0) {
       updateURL(entries);
     } else {
@@ -57,14 +65,14 @@ function App() {
     }
 
     const result = unserializeData(formData.serializedData);
-    
+
     const newEntry = {
       id: Date.now(),
       title: formData.title,
       serializedData: formData.serializedData,
       unserializedData: result.data,
       error: result.error,
-      format: result.format
+      format: result.format,
     };
 
     setEntries([...entries, newEntry]);
@@ -72,7 +80,7 @@ function App() {
   };
 
   const handleRemoveEntry = (id) => {
-    setEntries(entries.filter(entry => entry.id !== id));
+    setEntries(entries.filter((entry) => entry.id !== id));
   };
 
   const handleAddNew = () => {
@@ -112,14 +120,18 @@ function App() {
           </a>
         </div>
         <h1>Online Unserialize Tool - Unserialize PHP & JSON Data</h1>
-        <p>Free online unserialize tool to unserialize PHP and JSON data. Beautify serialized data and compare multiple results side by side. 100% client-side processing - no cookies, no tracking.</p>
+        <p>
+          Free online unserialize tool to unserialize PHP and JSON data. Beautify serialized data
+          and compare multiple results side by side. 100% client-side processing - no cookies, no
+          tracking.
+        </p>
       </header>
 
       <main className="app-main">
         {showForm && (
           <div className="form-section">
-            <Form 
-              onSubmit={handleFormSubmit} 
+            <Form
+              onSubmit={handleFormSubmit}
               onCancel={handleCancelForm}
               maxEntriesReached={entries.length >= 3}
             />
@@ -154,8 +166,8 @@ function App() {
                     Add
                   </button>
                 )}
-                <button 
-                  onClick={handleCopyShareLink} 
+                <button
+                  onClick={handleCopyShareLink}
                   className="btn btn-share"
                   title="Copy shareable link"
                 >
@@ -173,12 +185,12 @@ function App() {
                 </button>
               </div>
             </div>
-            
+
             <div className="results-grid">
               {entries.map((entry) => (
-                <ResultDisplay 
-                  key={entry.id} 
-                  entry={entry} 
+                <ResultDisplay
+                  key={entry.id}
+                  entry={entry}
                   onRemove={() => handleRemoveEntry(entry.id)}
                 />
               ))}
@@ -191,38 +203,49 @@ function App() {
         <div className="privacy-notice">
           <IconShield size={20} className="privacy-icon" />
           <div className="privacy-content">
-            <strong>Privacy First:</strong> All data processing happens in your browser. No cookies, no tracking, no server storage.
+            <strong>Privacy First:</strong> All data processing happens in your browser. No cookies,
+            no tracking, no server storage.
           </div>
         </div>
-        
+
         {/* SEO-friendly content section */}
         <section className="seo-content" aria-label="About unserialize tool">
           <h2 className="seo-heading">Online Unserialize Tool - Unserialize PHP & JSON Data</h2>
           <p className="seo-text">
-            Use our free <strong>online unserialize tool</strong> to <strong>unserialize PHP</strong> and <strong>unserialize JSON</strong> data instantly. 
-            Our <strong>unserialize and compare</strong> tool allows you to beautify serialized data and compare multiple results side by side. 
-            Whether you need to <strong>unserialize PHP</strong> data or <strong>unserialize JSON</strong> data, our tool automatically detects the format. 
-            <strong>Beautify serialized data</strong> online with our easy-to-use interface. 
-            <strong>Beautify JSON</strong> and PHP serialized data without any server-side processing - everything happens in your browser.
+            Use our free <strong>online unserialize tool</strong> to{' '}
+            <strong>unserialize PHP</strong> and <strong>unserialize JSON</strong> data instantly.
+            Our <strong>unserialize and compare</strong> tool allows you to beautify serialized data
+            and compare multiple results side by side. Whether you need to{' '}
+            <strong>unserialize PHP</strong> data or <strong>unserialize JSON</strong> data, our
+            tool automatically detects the format.
+            <strong>Beautify serialized data</strong> online with our easy-to-use interface.
+            <strong>Beautify JSON</strong> and PHP serialized data without any server-side
+            processing - everything happens in your browser.
           </p>
           <h3 className="seo-heading">How to Use the Unserialize Tool</h3>
           <p className="seo-text">
-            Simply paste your <strong>PHP serialized</strong> or <strong>JSON serialized</strong> data into the form above. 
-            Our tool will automatically detect whether it's PHP or JSON format and unserialize it accordingly. 
-            You can compare up to 3 different unserialized data sets side by side. 
-            Use our <strong>beautify serialized online</strong> feature to format your data for easy reading and analysis.
-            Also you can <strong>share comparisons</strong> easily using our shareable link feature.
+            Simply paste your <strong>PHP serialized</strong> or <strong>JSON serialized</strong>{' '}
+            data into the form above. Our tool will automatically detect whether it's PHP or JSON
+            format and unserialize it accordingly. You can compare up to 3 different unserialized
+            data sets side by side. Use our <strong>beautify serialized online</strong> feature to
+            format your data for easy reading and analysis. Also you can{' '}
+            <strong>share comparisons</strong> easily using our shareable link feature.
           </p>
         </section>
-        
+
         <div className="footer-bottom">
-          <p className="copyright">© {new Date().getFullYear()} Unserialize Guru. All rights reserved.</p>
-          <p className="made-with-love">Made with ❤️ for developers who need to unserialize and compare data quickly and securely.</p>
+          <p className="copyright">
+            © {new Date().getFullYear()} Unserialize Guru. All rights reserved.
+          </p>
+          <p className="made-with-love">
+            Made with ❤️ for developers who need to unserialize and compare data quickly and
+            securely.
+          </p>
           <p className="made-by">
             Made by:{' '}
-            <a 
-              href="https://x.com/BuntyWP" 
-              target="_blank" 
+            <a
+              href="https://x.com/BuntyWP"
+              target="_blank"
               rel="noopener noreferrer"
               className="twitter-link"
             >

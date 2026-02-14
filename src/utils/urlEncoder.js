@@ -12,18 +12,18 @@ export function encodeEntries(entries) {
 
   // Only store essential data (title and serializedData)
   // We'll unserialize again when loading from URL
-  const dataToEncode = entries.map(entry => ({
+  const dataToEncode = entries.map((entry) => ({
     title: entry.title || null,
-    serializedData: entry.serializedData
+    serializedData: entry.serializedData,
   }));
 
   try {
     // Convert to JSON string
     const jsonString = JSON.stringify(dataToEncode);
-    
+
     // Compress using deflate (gzip compatible)
     const compressed = pako.deflate(jsonString);
-    
+
     // Convert Uint8Array to base64 (handle large arrays)
     let binaryString = '';
     const chunkSize = 0x8000; // 32KB chunks
@@ -32,7 +32,7 @@ export function encodeEntries(entries) {
       binaryString += String.fromCharCode.apply(null, chunk);
     }
     const base64 = btoa(binaryString);
-    
+
     return base64;
   } catch (error) {
     console.error('Error encoding entries:', error);
@@ -57,13 +57,13 @@ export function decodeEntries(encodedString) {
     for (let i = 0; i < binaryString.length; i++) {
       bytes[i] = binaryString.charCodeAt(i);
     }
-    
+
     // Decompress using gzip
     const decompressed = pako.inflate(bytes, { to: 'string' });
-    
+
     // Parse JSON
     const entries = JSON.parse(decompressed);
-    
+
     return entries;
   } catch (error) {
     console.error('Error decoding entries:', error);
@@ -78,13 +78,13 @@ export function decodeEntries(encodedString) {
 export function updateURL(entries) {
   const encoded = encodeEntries(entries);
   const url = new URL(window.location.href);
-  
+
   if (encoded) {
     url.searchParams.set('data', encoded);
   } else {
     url.searchParams.delete('data');
   }
-  
+
   // Update URL without page reload
   window.history.replaceState({}, '', url.toString());
 }
@@ -96,11 +96,11 @@ export function updateURL(entries) {
 export function getEntriesFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   const encodedData = urlParams.get('data');
-  
+
   if (!encodedData) {
     return null;
   }
-  
+
   return decodeEntries(encodedData);
 }
 
@@ -131,4 +131,3 @@ export async function copyURLToClipboard() {
     }
   }
 }
-

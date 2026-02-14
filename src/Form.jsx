@@ -18,7 +18,7 @@ function Form({ onSubmit, onCancel, maxEntriesReached }) {
 
     onSubmit({
       title: title.trim() || null,
-      serializedData: serializedData.trim()
+      serializedData: serializedData.trim(),
     });
 
     // Reset form
@@ -78,4 +78,3 @@ function Form({ onSubmit, onCancel, maxEntriesReached }) {
 }
 
 export default Form;
-
