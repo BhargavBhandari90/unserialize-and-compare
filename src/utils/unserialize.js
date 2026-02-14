@@ -9,16 +9,16 @@ function isPHPSerialized(data) {
   if (typeof data !== 'string' || data.trim() === '') {
     return false;
   }
-  
+
   // PHP serialized data typically starts with specific characters
   const trimmed = data.trim();
   const phpSerializedPatterns = [
-    /^[aibdsONCr]:\d+:/,  // Basic types: a:array, i:int, b:bool, d:double, s:string, N:null, O:object, C:custom, r:reference
-    /^a:\d+:\{/,          // Array format
-    /^O:\d+:"/,           // Object format
+    /^[aibdsONCr]:\d+:/, // Basic types: a:array, i:int, b:bool, d:double, s:string, N:null, O:object, C:custom, r:reference
+    /^a:\d+:\{/, // Array format
+    /^O:\d+:"/, // Object format
   ];
-  
-  return phpSerializedPatterns.some(pattern => pattern.test(trimmed));
+
+  return phpSerializedPatterns.some((pattern) => pattern.test(trimmed));
 }
 
 /**
@@ -30,10 +30,12 @@ function isJSON(data) {
   if (typeof data !== 'string' || data.trim() === '') {
     return false;
   }
-  
+
   const trimmed = data.trim();
-  return (trimmed.startsWith('{') && trimmed.endsWith('}')) ||
-         (trimmed.startsWith('[') && trimmed.endsWith(']'));
+  return (
+    (trimmed.startsWith('{') && trimmed.endsWith('}')) ||
+    (trimmed.startsWith('[') && trimmed.endsWith(']'))
+  );
 }
 
 /**
@@ -45,11 +47,11 @@ function formatData(data) {
   if (data === null || data === undefined) {
     return 'null';
   }
-  
+
   if (typeof data === 'string') {
     return data;
   }
-  
+
   // For objects and arrays, use JSON.stringify with indentation
   try {
     return JSON.stringify(data, null, 2);
@@ -69,7 +71,7 @@ export function unserializeData(serializedData) {
       success: false,
       data: null,
       error: 'Serialized data is required',
-      format: null
+      format: null,
     };
   }
 
@@ -83,14 +85,14 @@ export function unserializeData(serializedData) {
         success: true,
         data: unserialized,
         error: null,
-        format: 'PHP'
+        format: 'PHP',
       };
     } catch (error) {
       return {
         success: false,
         data: null,
         error: `PHP unserialization failed: ${error.message}`,
-        format: 'PHP'
+        format: 'PHP',
       };
     }
   }
@@ -103,14 +105,14 @@ export function unserializeData(serializedData) {
         success: true,
         data: parsed,
         error: null,
-        format: 'JSON'
+        format: 'JSON',
       };
     } catch (error) {
       return {
         success: false,
         data: null,
         error: `JSON parsing failed: ${error.message}`,
-        format: 'JSON'
+        format: 'JSON',
       };
     }
   }
@@ -123,7 +125,7 @@ export function unserializeData(serializedData) {
       success: true,
       data: parsed,
       error: null,
-      format: 'JSON (auto-detected)'
+      format: 'JSON (auto-detected)',
     };
   } catch (jsonError) {
     // Try PHP as last resort
@@ -133,14 +135,14 @@ export function unserializeData(serializedData) {
         success: true,
         data: unserialized,
         error: null,
-        format: 'PHP (auto-detected)'
+        format: 'PHP (auto-detected)',
       };
     } catch (phpError) {
       return {
         success: false,
         data: null,
         error: 'Unable to parse as PHP or JSON. Please check the format.',
-        format: null
+        format: null,
       };
     }
   }
@@ -154,4 +156,3 @@ export function unserializeData(serializedData) {
 export function formatForDisplay(data) {
   return formatData(data);
 }
-
